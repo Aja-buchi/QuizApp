@@ -21,4 +21,3 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 }
-//("Hello there!, here's all possible questions")
