@@ -9,7 +9,7 @@ import lombok.Data;
 @Entity @Data
 public class Question {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String questiontitle;
     private String option1;
