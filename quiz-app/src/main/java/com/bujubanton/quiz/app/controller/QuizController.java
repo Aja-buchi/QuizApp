@@ -1,6 +1,7 @@
 package com.bujubanton.quiz.app.controller;
 
 import com.bujubanton.quiz.app.models.QuestionDao;
+import com.bujubanton.quiz.app.models.Response;
 import com.bujubanton.quiz.app.services.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,5 +22,10 @@ public class QuizController {
     @GetMapping("get/{id}")
     public ResponseEntity <List<QuestionDao>> getQuizQuestions(@PathVariable Long id){
         return quizService.getQuizQuestions(id);
+    }
+
+    @PostMapping("submit/{id}")
+    public ResponseEntity<Integer> submitQuestion(@PathVariable Integer id, @PathVariable List<Response> responses){
+        return quizService.calcResult(id, responses);
     }
 }

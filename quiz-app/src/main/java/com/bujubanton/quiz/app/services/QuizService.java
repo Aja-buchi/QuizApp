@@ -3,6 +3,7 @@ package com.bujubanton.quiz.app.services;
 import com.bujubanton.quiz.app.models.Question;
 import com.bujubanton.quiz.app.models.QuestionDao;
 import com.bujubanton.quiz.app.models.Quiz;
+import com.bujubanton.quiz.app.models.Response;
 import com.bujubanton.quiz.app.repositories.QuestionRepository;
 import com.bujubanton.quiz.app.repositories.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,19 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(questionsForUsers, HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> calcResult(Integer id, List<Response> responses) {
+        Optional<Quiz> quiz = quizRepository.findById(Long.valueOf(id));
+        List<Question> questions = quiz.get().getQuestions();
+        int right = 0;
+        int i =0;
+
+        for (Response response: responses) {
+            response.getResponse().equals(questions.get(i).getRightanswer());
+            right++;
+            i++;
+        }
+        return new ResponseEntity<>(right, HttpStatus.OK);
     }
 }
